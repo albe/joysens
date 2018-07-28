@@ -5,6 +5,8 @@ Created by Alexander "Raphael" Berl, sometime during 2007-2008
 
 Unfortunatley, all commit history got lost when assembla shut down the original SVN repository. Long live GIT.
 
+JoySens is a custom firmware plugin for Sony PSP that allows you to control the sensitivity of the analog stick in a very efficient way as well as “repair” faulty analog sticks. In very bad cases where the analog stick is not repairable, you can also just disable it so it doesn’t interfere with your games anymore. Apart from that it includes functionality to swap and remap DPad input to analog stick and vice versa, hence allows you to control the XMB with the analog stick for example.
+
 ## Readme:
 https://github.com/albe/joysens/blob/master/release/Readme.txt
 
