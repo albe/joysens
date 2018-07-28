@@ -35,7 +35,9 @@ PSP_MODULE_INFO("JoySens", PSP_MODULE_KERNEL, 1, 5);
 #define JOYSENSVERSION "1.5"
 #endif
 
-int (*g_ctrl_common)(SceCtrlData *, int count, int type);
+//int (*g_ctrl_common)(SceCtrlData *, int count, int type  );//old
+int (*g_ctrl_common)(SceCtrlData *, int count, int type , int type2 );//new
+
 int (*g_setframebuf)(int unk, void* addr, int width, int psm, int sync);
 
 
@@ -686,24 +688,32 @@ void adjust_values(SceCtrlData *pad_data, int count, int neg)
 	*/
 }
 
+////// edited by neur0n ///////////
+int higher_fw_flag = 0;
 
-
-int ctrl_hook_func(SceCtrlData *pad_data, int count, int type)
+//int ctrl_hook_func(SceCtrlData *pad_data, int count, int type )//old
+int ctrl_hook_func(SceCtrlData *pad_data, int count, int type , int type2)//new
 {
 	int ret;
 
 	if (g_settings.forceanalog)
 		sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
-	ret = g_ctrl_common(pad_data, count, type);
+
+//	ret = g_ctrl_common(pad_data, count, type  );//old
+	ret = g_ctrl_common(pad_data, count, type , type2 );//new
 	if(ret <= 0)
 	{
 		return ret;
 	}
 
+	if( higher_fw_flag )// if FW is higher than 6.00 .
+		type = type2;
+
 	adjust_values(pad_data, ret, type&1);
 
 	return ret;
 }
+/////////////////////////////////
 
 #ifndef JOYSENS_LITE
 int setframebuf_hook_func(int unk, void* addr, int width, int psm, int sync)
@@ -1082,6 +1092,12 @@ int module_start(SceSize args, void *argp)
 	}
 	else
 		debuglog("failed!\n");
+
+	//////////// edited by neur0n /////////////
+	if( sceKernelDevkitVersion() > 0x06000000)
+		higher_fw_flag = 1;
+
+	///////////////////////////////////////////
 	
 	return 0;
 }

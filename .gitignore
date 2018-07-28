@@ -1,1 +1,4 @@
 .svn
+/src/*.elf
+/src/*.prx
+/src/*.o
