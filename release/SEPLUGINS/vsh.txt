@@ -1,0 +1,2 @@
+ms0:/SEPLUGINS/joysens.prx
+ms0:/SEPLUGINS/joysens_lite.prx

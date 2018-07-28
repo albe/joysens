@@ -1,0 +1,90 @@
+Q: What is JoySens?
+A: JoySens is a custom firmware plugin for Sony PSP that allows you to control the sensitivity of the analog stick in a very
+   efficient way as well as "repair" faulty analog sticks. In very bad cases where the analog stick is not repairable, you
+   can also just disable it so it doesn't interfere with your games anymore.
+   Apart from that it includes functionality to swap and remap DPad input to analog stick and vice versa, hence allows you
+   to control the XMB with the analog stick for example.
+
+
+Q: How do I set JoySens to be able to control the XMB with the analog?
+A: Make sure that forceanalog is set to 1 in the ini (default) and change the remap mode in the [VSH] section to Analog->DPad (2)
+   or Analog<->DPad (3) if you still want to be able to give analog input in some way (for the photo viewer or browser).
+
+
+Q: My analog stick is messed up and lets my characters move in random directions even when I don't touch it!
+A: When the direction tends to always be the same, it's very likely that your analog stick is just off-centered.
+   You have two options to fix this illbehaviour, a semi-automatic and a manual method.
+   For the semi-automatic method, see the readme under "CENTER" for exact instructions on that.
+   
+   For the manual method you need to adjust the center value in the ini to match your analog stick. You'll find good values for
+   it by leaving the analog stick untouched and watching the first pair of values in the first line of the info output.
+   Try to find a good average of the values you see and put those in the ini file. Restart your PSP and check if the second
+   pair of values in the first line of the info output stay at <0,0> when the analog stick is untouched and repeat the steps
+   from above if it doesn't.
+
+   If the directions are completely random and never go in the same direction, it's probably just that the analog stick is
+   too responsive. In that case, try setting the adjust parameter to something like 2.0 - 2.5. Then slowly increase the value
+   until the ghost movement is gone.
+   
+   More detailed instructions can be found online at http://www.fx-world.org/wordpress/?page_id=65
+
+
+Q: My analog stick doesn't recognize input to the left/right/top/bottom!
+A: This is caused by the analog stick returning too small values, even when pushed to the extremes at which it should give
+   either -128 (up and left direction) or 127 (down and right direction). This can be solved by "rescaling" the values into
+   the proper range, either with a semi-automatic method or a manual method.
+   
+   For the semi-automatic method, see the readme under "RESCALE" or read http://www.fx-world.org/wordpress/?page_id=65 point 2.
+   
+   For the manual method, check the first line of the info output when pressing the analog stick in that direction. If the analog stick scales correctly
+   you should see values -128 (up or left) or 127 (down or right) as the first (left or right) or second (up or down) coordinate.
+   So if you move your stick to the left, you should see <-128,*>, to the right you should see <127,*>, pulling up you should see
+   <*,-128> and down you should see <*,127>. If the values are smaller (bigger) your analog stick is messed up and you need to adjust
+   the min/max values in the ini file to represent the minimal/maximal values you get when moving the stick to the extremes.
+   Let's say you get values <-128,-101> to <96,127> then edit the ini file and set min to <-128,-98> and max to <93,127> or equal.
+   You should decrease the non maximum values a bit (by 2-3 is good in most cases) since those values are not 100% correct, so
+   you might still end up with unresponsive input with the exact values.
+   Now restart the plugin (by starting a homebrew/game or restarting the PSP) and check if analog stick is responsive again. If not
+   try to decrease the values further until it is.
+   
+   More detailed instructions can be found online at http://www.fx-world.org/wordpress/?page_id=65
+
+
+Q: I want joysens to only apply to game xy/vsh, what can I do?
+A: While in the game of question (or VSH=XMB=PSP Firmware GUI), press NOTE+CIRCLE to save the current settings. This will
+   create a new section ("[%GAMEID%]") in the joysens.ini file, with the current selected settings. Afterwards, you can edit
+   the settings for this game in the joysens.ini file, or just change settings through the button combinations and press
+   NOTE+CIRCLE again inside the game.
+   If the save settings method doesn't work for you, or you're bound to the lite version, you have to find out the GAMEID
+   and create the section for the config in the joysens.ini file yourself. You can find the GAMEID in the gamesaves folder
+   matching your game (ms0:/PSP/SAVEDATA/), which follows the naming scheme "ULUSxxxxx", "ULESxxxxx", "ULJSxxxxx" etc.
+   In the joysens.ini file, just write "[ULUS-xxxxx]" and alike at the end of the file, followed by the settings for that game
+   you want to set.
+
+
+Q: There are two files, joysens.prx and joysens_lite.prx. Which one is the right?
+A: Normally you should only use joysens.prx (normal version). However, there might be cases in which you will want to switch to
+   joysens_lite.prx (lite version).
+   This could be that the normal version doesn't work for you in certain games, or together with your favorite plugins. Or maybe
+   you just feel that the normal version slows your games down too much.
+   The lite version might help you in those cases, however, you will have no way to change the settings ingame with button presses
+   or see the info output to check how joysens is configured and how it alters your analog stick return values.
+   Only the remap mode button combination will still work.
+   This will probably be no problem for you, once you've setup joysens to your likings and don't depend on those features anymore.
+   
+
+Q: My analog stick is unuseable, no matter what settings I try. How do I go about disabling it?
+A: Set the adjust parameter to 0 and the analog stick gets disabled.
+
+
+Q: How do I go about disabling a config button? Removing the line in joysens.ini doesn't work!
+A: JoySens currently handles non-existing values in the joysens.ini file as if they were set to default.
+   This is to make sure that JoySens works reliable, even if the joysens.ini file got corrupt or doesn't exist any more.
+   To disable a config button, you have to explicitly set it to nothing (f.e. "resetbtn = " if you want to disable the reset feature).
+   If you disable the primarybtn, the config buttons will be disabled alltogether.
+   
+   
+Q: JoySens doesn't work in CFW x.xx (>3.80)!
+A: Try formating your flash1 in the recovery menu (reboot while holding R trigger). If it still won't work,
+   also try formating your memory stick from the settings menu (make a backup first).
+   If it still won't work, you can contact me with information on the firmware you use and I'll take a look.
