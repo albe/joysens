@@ -10,3 +10,9 @@ https://github.com/albe/joysens/blob/master/release/Readme.txt
 
 ## FAQ:
 https://github.com/albe/joysens/blob/master/release/FAQ.txt
+
+## How-To:
+https://web.archive.org/web/20111223021245/http://www.fx-world.org:80/wordpress/?page_id=65
+
+## Mathematical background:
+https://web.archive.org/web/20090122155831/http://www.fx-world.org:80/wordpress/?page_id=35
